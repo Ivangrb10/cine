@@ -28,18 +28,16 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->nombre }}</td>
                         <td>{{ $item->descripcion }}</td>
-                        <td><a href="{{ route('categorias.show', $item->id) }}" class="btn btn-info">
-                         <i class="fas fa-eye"></i> Detalles
-                        </a>
+                        <td>
                         </td>
 
                         <td>
+                            <a href="{{ route('categorias.show', $item->id) }}" class="btn btn-info">
+                            <i class="fas fa-eye"></i> Detalles
+                            </a>
                             <a href="{{ url('categorias/'.$item->id.'/edit') }}" class="btn btn-primary">
                                 <i class="fas fa-pencil-alt"></i> Editar
                             </a>
-                        </td> 
-
-                        <td>
                             <form action="{{ route('categorias.destroy', $item->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
@@ -47,6 +45,7 @@
                                     <i class="fas fa-trash-alt"></i> Eliminar
                                 </button>
                             </form>
+                        
                         </td>
                     </tr>
                 @endforeach
