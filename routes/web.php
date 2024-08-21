@@ -9,6 +9,7 @@ use App\Http\Controllers\ReservasController;
 use App\Http\Controllers\SalasController;
 use App\Http\Controllers\ActoresController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,17 +26,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-route::resource('categorias', CategoriaController::class);
-route::resource('clasificaciones', ClasificacionesController::class);
-route::resource('directores', DirectoresController::class);
-route::resource('funciones', FuncionesController::class);
-route::resource('generos', GenerosController::class);
-route::resource('peliculas', PeliculasController::class);
-route::resource('reservas', ReservasController::class);
-route::resource('salas',SalasController::class);
-route::resource('actores', ActoresController::class);
-
+Route::resource('categorias', CategoriaController::class);
+Route::resource('clasificaciones', ClasificacionesController::class);
+Route::resource('directores', DirectoresController::class);
+Route::resource('funciones', FuncionesController::class);
+Route::resource('generos', GenerosController::class);
+Route::resource('peliculas', PeliculasController::class);
+Route::resource('reservas', ReservasController::class);
+Route::resource('salas', SalasController::class);
+Route::resource('actores', ActoresController::class);
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('categorias', CategoriaController::class);
+Route::get('/categorias/{id}', [CategoriaController::class, 'show'])->name('categorias.show');
+
