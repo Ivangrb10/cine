@@ -34,7 +34,7 @@ class CategoriaController extends Controller
         'nombre' => 'required|max:255',
         'descripcion' => 'nullable|max:500', // Agregar validación para descripción
     ]);
-
+    
     Categoria::create($request->all());
 
     return redirect()->route('categorias.index')

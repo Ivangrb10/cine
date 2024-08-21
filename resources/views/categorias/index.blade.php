@@ -9,14 +9,16 @@
         <div class="card-body">
             <table class="table table-striped table-hover">
                 <thead>
-                    <a href="{{ route('categorias.create') }}" class="btn btn-primary">
-                                <i class="fas fa-plus"></i> Crear
-                            </a>
+                    
                     <tr>
                         <th>#</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
-                        <th>Acciones</th>
+                        <th>Acciones
+                            <a href="{{ route('categorias.create') }}" class="btn btn-success ml-4">
+                                <i class="fas fa-plus"></i> Crear
+                            </a>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,7 +28,6 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->nombre }}</td>
                         <td>{{ $item->descripcion }}</td>
-
                         <td><a href="{{ route('categorias.show', $item->id) }}" class="btn btn-info">
                          <i class="fas fa-eye"></i> Detalles
                         </a>
