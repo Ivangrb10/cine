@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    <a href="{{ route('categorias.index') }}" class="btn btn-warning">Atrás</a>
     <h2>Editar Categoría</h2>
     <form action="{{ route('categorias.update', $categoria->id) }}" method="POST">
         @csrf
