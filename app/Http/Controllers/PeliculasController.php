@@ -21,29 +21,40 @@ class PeliculasController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-{
+    {
   
+    $directores = directores::all();
+    $generos = generos::all();
     return view('peliculas.create', compact('directores', 'generos'));
-}
+    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
 {
+    // Validar los datos del formulario
     $request->validate([
-        'titulo' => 'required|max:255',
-        'descripcion' => 'nullable|max:500',
-        'director_id' => 'nullable|exists:directors,id', // Validación de clave foránea
-        'anio' => 'nullable|integer', // Validación de número entero
-        'genero_id' => 'nullable|exists:generos,id', // Validación de clave foránea
-        'duracion' => 'nullable|integer', // Validación de número entero
+        'titulo' => 'required|string|max:255',
+        'descripcion' => 'required|string',
+        'director_id' => 'required|exists:directores,id',
+        'genero_id' => 'required|exists:generos,id',
+        'anio' => 'required|integer|min:1888|max:' . date('Y'),
+        'duracion' => 'required|integer|min:1',
     ]);
 
-    peliculas::create($request->all());
+    // Crear una nueva película con los datos validados
+    peliculas::create([
+        'titulo' => $request->titulo,
+        'descripcion' => $request->descripcion,
+        'director_id' => $request->director_id,
+        'genero_id' => $request->genero_id,
+        'anio' => $request->anio,
+        'duracion' => $request->duracion,
+    ]);
 
-    return redirect()->route('peliculas.index')
-                     ->with('success', 'Pelicula creada exitosamente.');
+    // Redirigir al índice de películas con un mensaje de éxito
+    return redirect()->route('peliculas.index')->with('success', 'Película creada exitosamente.');
 }
 
 

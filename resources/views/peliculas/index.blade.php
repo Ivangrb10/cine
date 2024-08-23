@@ -30,7 +30,7 @@
                         <th>Genero_id</th>
                         <th>Duracion</th>
                         <th>Acciones
-                            <a href="{{ route('directores.create') }}" class="btn btn-success ml-4">
+                            <a href="{{ route('peliculas.create') }}" class="btn btn-success ml-4">
                                 <i class="fas fa-plus"></i> Crear
                             </a>
                         </th>

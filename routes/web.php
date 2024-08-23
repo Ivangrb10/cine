@@ -37,7 +37,6 @@ Route::resource('salas', SalasController::class);
 Route::resource('actores', ActoresController::class);
 
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('categorias', CategoriaController::class);
 Route::get('/categorias/{id}', [CategoriaController::class, 'show'])->name('categorias.show');
