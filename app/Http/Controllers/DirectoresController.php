@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\directores;
+use App\Models\Directores;
 use Illuminate\Http\Request;
 
 class DirectoresController extends Controller
@@ -12,8 +12,8 @@ class DirectoresController extends Controller
      */
     public function index()
     {
-        $directores = directores:: all();
-        return view ('directores.index', compact('directores'));
+        $directores = Directores::all();
+        return view('directores.index', compact('directores'));
     }
 
     /**
@@ -21,7 +21,7 @@ class DirectoresController extends Controller
      */
     public function create()
     {
-        //
+        return view('directores.create');
     }
 
     /**
@@ -29,38 +29,66 @@ class DirectoresController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|max:255',
+            'biografia' => 'nullable|max:500',
+            'fecha_nac' => 'nullable|date',
+
+        ]);
+
+        Directores::create($request->all());
+
+        return redirect()->route('directores.index')
+                         ->with('success', 'Director creado exitosamente.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(directores $directores)
+    public function show($id)
     {
-        //
+        $directores = Directores::find($id);
+        return view('directores.show', compact('directores'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(directores $directores)
+    public function edit($id)
     {
-        //
+        $directores = Directores::find($id);
+        return view('directores.edit', compact('directores'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, directores $directores)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|max:255',
+            'biografia' => 'nullable|max:500',
+            'fecha_nac' => 'nullable|date',
+
+        ]);
+
+        $directores = Directores::find($id);
+        $directores->update($request->all());
+
+        return redirect()->route('directores.index')
+                         ->with('success', 'Director actualizado exitosamente.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(directores $directores)
+    public function destroy($id)
     {
-        //
+        $directores = Directores::find($id);
+        $directores->delete();
+
+        return redirect()->route('directores.index')
+                         ->with('success', 'Director eliminado exitosamente.');
     }
 }
+

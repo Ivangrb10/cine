@@ -21,7 +21,7 @@ class GenerosController extends Controller
      */
     public function create()
     {
-        //
+        return view('generos.create');
     }
 
     /**
@@ -29,38 +29,58 @@ class GenerosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|max:255',
+            'descripcion' => 'nullable|max:500', // Agregar validación para descripción
+        ]);
+        
+        generos::create($request->all());
+    
+        return redirect()->route('generos.index')
+                         ->with('success', 'Categoría creada exitosamente.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(generos $generos)
+    public function show($id)
     {
-        //
+        $generos = generos::find($id);
+        return view('generos.show', compact('generos'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(generos $generos)
+    public function edit($id)
     {
-        //
+        $generos = generos::find($id);
+        return view('generos.edit', compact('generos'));    
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, generos $generos)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|max:255',
+            'descripcion' => 'nullable|max:500',
+        ]);
+    
+        $generos = generos::find($id);
+        $generos->update($request->all());
+    
+        return redirect()->route('generos.index')
+                         ->with('success', 'Genero actualizado exitosamente.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(generos $generos)
+    public function destroy($id)
     {
-        //
+        $generos = generos::find($id);
+        $generos->delete();
+
+    return redirect()->route('generos.index')
+                     ->with('success', 'Genero eliminado exitosamente.');
     }
 }

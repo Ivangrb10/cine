@@ -41,4 +41,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('categorias', CategoriaController::class);
 Route::get('/categorias/{id}', [CategoriaController::class, 'show'])->name('categorias.show');
-
+Route::get('/directores/{id}', [DirectoresController::class, 'show'])->name('directores.show');
+Route::get('/actores/{id}', [ActoresController::class, 'show'])->name('actores.show');
+Route::get('/generos/{id}', [GenerosController::class, 'show'])->name('generos.show');
+Route::get('/salas/{id}', [SalasController::class, 'show'])->name('salas.show');

@@ -12,8 +12,8 @@ class ActoresController extends Controller
      */
     public function index()
     {
-        $actores = actores:: all();
-        return view ('actores.index', compact('actores'));
+        $actores = actores::all();
+        return view('actores.index', compact('actores'));
     }
 
     /**
@@ -21,7 +21,7 @@ class ActoresController extends Controller
      */
     public function create()
     {
-        //
+        return view('actores.create');
     }
 
     /**
@@ -29,31 +29,54 @@ class ActoresController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|max:255',
+            'biografia' => 'nullable|max:500',
+            'fecha_nac' => 'nullable|date',
+        ]);
+
+        actores::create($request->all());
+
+        return redirect()->route('actores.index')
+                         ->with('success', 'Actor creado exitosamente.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(actores $actores)
-    {
-        //
-    }
+    public function show($id)
+{
+    $actores = actores::find($id);
+    return view('actores.show', compact('actores'));
+}
+
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(actores $actores)
+    public function edit($id)
     {
-        //
+        $actores = actores::find($id);
+        return view('actores.edit', compact('actores'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, actores $actores)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|max:255',
+            'biografia' => 'nullable|max:500',
+            'fecha_nac' => 'nullable|date',
+
+        ]);
+
+        $actores = actores::find($id);
+        $actores->update($request->all());
+
+        return redirect()->route('actores.index')
+                         ->with('success', 'actor actualizado exitosamente.');
     }
 
     /**
@@ -61,6 +84,10 @@ class ActoresController extends Controller
      */
     public function destroy(actores $actores)
     {
-        //
+        $actores->delete();
+
+        return redirect()->route('actores.index')
+                         ->with('success', 'Actor eliminado exitosamente.');
     }
 }
+
