@@ -113,8 +113,14 @@ class PeliculasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(peliculas $peliculas)
+    public function destroy($id)
     {
-        //
+        $peliculas = peliculas::findOrFail($id);
+
+    // Eliminar la función
+        $peliculas->delete();
+
+    // Redirigir con un mensaje de éxito
+    return redirect()->route('peliculas.index')->with('success', 'Pelicula eliminada exitosamente.');
     }
 }
