@@ -44,3 +44,4 @@ Route::get('/directores/{id}', [DirectoresController::class, 'show'])->name('dir
 Route::get('/actores/{id}', [ActoresController::class, 'show'])->name('actores.show');
 Route::get('/generos/{id}', [GenerosController::class, 'show'])->name('generos.show');
 Route::get('/salas/{id}', [SalasController::class, 'show'])->name('salas.show');
+Route::get('/peliculas/{id}', [PeliculasController::class, 'show'])->name('peliculas.show');

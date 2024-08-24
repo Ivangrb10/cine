@@ -26,6 +26,7 @@
                         <th>#</th>
                         <th>Titulo</th>
                         <th>Descripcion</th>
+                        <th>Director_id</th>
                         <th>Año</th>
                         <th>Genero_id</th>
                         <th>Duracion</th>
@@ -42,13 +43,12 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->titulo }}</td>
                         <td>{{ $item->descripcion }}</td>
+                        <td>{{ $item->director_id }}</td>
                         <td>{{ $item->anio }}</td>
                         <td>{{ $item->genero_id }}</td>
                         <td>{{ $item->duracion }}</td>
                         <td>
-                            <a href="{{ route('peliculas.show', $item->id) }}" class="btn btn-info">
-                                <i class="fas fa-eye"></i> Detalles
-                            </a>
+                            
                             <a href="{{ url('peliculas/'.$item->id.'/edit') }}" class="btn btn-primary">
                                 <i class="fa-solid fa-pen"></i> Editar
                             </a>
