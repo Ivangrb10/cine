@@ -16,7 +16,7 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            Peliculas
+            Funciones
         </div>
         <div class="card-body">
             <table class="table table-striped table-hover">

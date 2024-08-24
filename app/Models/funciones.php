@@ -5,20 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Funciones extends Model
+class funciones extends Model
 {
     protected $table = 'funciones';
-    protected $primaryKey = 'id';
+    protected $primarykey = 'id';
     protected $fillable = ['pelicula_id', 'sala_id', 'fecha', 'hora'];
-
     public function peliculas()
     {
-        return $this->belongsTo(Peliculas::class);
+        return $this->belongsTo(peliculas::class);
     }
 
-    public function sala()
+    public function salas()
     {
-        return $this->belongsTo(Salas::class);
+        return $this->belongsTo(salas::class);
     }
 }
-

@@ -2,65 +2,71 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\reservas;
 use Illuminate\Http\Request;
+use App\Models\Reservas;
+use App\Models\funciones;
+use App\Models\Clientes;
 
 class ReservasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $reservas = reservas:: all();
-        return view ('reservas.index', compact('reservas'));
+        $reservas = Reservas::all();
+        return view('reservas.index', compact('reservas'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Método para mostrar el formulario de creación
     public function create()
     {
-        //
+        $funciones = funciones::all();
+        $clientes = Clientes::all();
+        return view('reservas.create', compact('funciones', 'clientes'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Método para almacenar una nueva reserva
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'funcion_id' => 'required|exists:funciones,id',
+            'cliente_id' => 'required|exists:clientes,id',
+            'asientos' => 'required|integer|min:1',
+        ]);
+
+        Reservas::create($request->all());
+
+        return redirect()->route('reservas.index')->with('success', 'Reserva creada exitosamente.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(reservas $reservas)
+    // Método para mostrar el formulario de edición
+    public function edit($id)
     {
-        //
+        $reserva = Reservas::findOrFail($id);
+        $funciones = funciones::all();
+        $clientes = Clientes::all();
+        return view('reservas.edit', compact('reserva', 'funciones', 'clientes'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(reservas $reservas)
+    // Método para actualizar una reserva existente
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'funcion_id' => 'required|exists:funciones,id',
+            'cliente_id' => 'required|exists:clientes,id',
+            'asientos' => 'required|integer|min:1',
+        ]);
+
+        $reserva = Reservas::findOrFail($id);
+        $reserva->update($request->all());
+
+        return redirect()->route('reservas.index')->with('success', 'Reserva actualizada exitosamente.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, reservas $reservas)
+    // Método para eliminar una reserva
+    public function destroy($id)
     {
-        //
-    }
+        $reserva = Reservas::findOrFail($id);
+        $reserva->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(reservas $reservas)
-    {
-        //
+        return redirect()->route('reservas.index')->with('success', 'Reserva eliminada exitosamente.');
     }
 }
+
