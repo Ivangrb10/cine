@@ -17,7 +17,7 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            Clasificaciones
+            Clientes
         </div>
         <div class="card-body">
             <table class="table table-striped table-hover">
@@ -25,28 +25,34 @@
                     <tr>
                         <th>#</th>
                         <th>Nombre</th>
-                        <th>Descripción</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                        <th>Telefono</th>
+                        <th>Direccion</th>
                         <th>Acciones
-                            <a href="{{ route('clasificaciones.create') }}" class="btn btn-success ml-4">
+                            <a href="{{ route('clientes.create') }}" class="btn btn-success ml-4">
                                 <i class="fas fa-plus"></i> Crear
                             </a>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($clasificaciones as $item)
+                @foreach ($clientes as $item)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->nombre }}</td>
-                        <td>{{ $item->descripcion }}</td>
+                        <td>{{ $item->apellido }}</td>
+                        <td>{{ $item->email }}</td>
+                        <td>{{ $item->telefono }}</td>
+                        <td>{{ $item->direccion }}</td>
                         <td>
-                            <a href="{{ route('clasificaciones.show', $item->id) }}" class="btn btn-info">
+                            <a href="{{ route('clientes.show', $item->id) }}" class="btn btn-info">
                                 <i class="fas fa-eye"></i> Detalles
                             </a>
-                            <a href="{{ url('clasificaciones/'.$item->id.'/edit') }}" class="btn btn-primary">
+                            <a href="{{ url('clientes/'.$item->id.'/edit') }}" class="btn btn-primary">
                                 <i class="fa-solid fa-pen"></i> Editar
                             </a>
-                            <form action="{{ route('clasificaciones.destroy', $item->id) }}" method="POST" style="display:inline;">
+                            <form action="{{ route('clientes.destroy', $item->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">

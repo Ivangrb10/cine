@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class clientes extends Model
 {
-    use HasFactory;
+    protected $table = 'clientes';
+    protected $primaryKey = 'id'; // Corregido: primaryKey con "K" mayúscula
+    protected $fillable = ['nombre', 'apellido', 'email', 'telefono', 'direccion']; // Corregido: apellido en lugar de apellidos
 }
