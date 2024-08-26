@@ -31,4 +31,17 @@ $(document).ready(function() {
     $('#generos').DataTable();
 });
 
+$(document).ready(function() {
+    $('#peliculas').DataTable();
+});
+
+$(document).ready(function() {
+    $('#reservas').DataTable();
+});
+
+$(document).ready(function() {
+    $('#salas').DataTable();
+});
+
+
 
