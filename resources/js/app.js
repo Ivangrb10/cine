@@ -6,3 +6,29 @@ import 'datatables.net-bs4';
 $(document).ready(function() {
     $('#categorias').DataTable();
 });
+
+$(document).ready(function() {
+    $('#actores').DataTable();
+});
+
+$(document).ready(function() {
+    $('#clasificaciones').DataTable();
+});
+
+$(document).ready(function() {
+    $('#clientes').DataTable();
+});
+
+$(document).ready(function() {
+    $('#directores').DataTable();
+});
+
+$(document).ready(function() {
+    $('#funciones').DataTable();
+});
+
+$(document).ready(function() {
+    $('#generos').DataTable();
+});
+
+
