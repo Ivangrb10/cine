@@ -7,6 +7,7 @@ use App\Models\generos;
 use App\Models\pelicula;
 use App\Models\peliculas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PeliculaController extends Controller
 {
@@ -15,7 +16,14 @@ class PeliculaController extends Controller
      */
     public function index()
     {
-        //
+        $peliculas=DB::table('peliculas')
+        ->select('peliculas.*','generos.nombre as nombre_genero','directores.nombre as directores_nombre')
+        ->leftJoin('directores','directores.id','peliculas.director_id')
+        ->leftJoin('generos','generos.id','peliculas.generos_id')
+        ->get();
+       
+        dd($peliculas);
+        return view ('peliculas.index', compact('peliculas'));
     }
 
     /**

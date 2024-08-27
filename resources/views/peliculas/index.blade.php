@@ -47,9 +47,9 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->titulo }}</td>
                         <td>{{ $item->descripcion }}</td>
-                        <td>{{ $item->director_id }}</td>
+                        <td>{{ $item->directores_nombre }}</td>
                         <td>{{ $item->anio }}</td>
-                        <td>{{ $item->genero_id }}</td>
+                        <td>{{ $item->nombre_genero }}</td>
                         <td>{{ $item->duracion }}</td>
                         <td>
                             
