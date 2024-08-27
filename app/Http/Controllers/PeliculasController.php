@@ -13,6 +13,7 @@ class PeliculasController extends Controller
      */
     public function index()
     {
+        
         $peliculas = peliculas:: all();
         return view ('peliculas.index', compact('peliculas'));
     }
